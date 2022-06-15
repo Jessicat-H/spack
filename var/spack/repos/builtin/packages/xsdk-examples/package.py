@@ -92,3 +92,8 @@ class XsdkExamples(CMakePackage, CudaPackage):
             args.append('-DZLIB_LIBRARY_DIR=%s' % spec['zlib'].prefix.lib)
 
         return args
+
+    def check(self):
+        if self.run_tests:
+            with working_dir(self.build_directory):
+                ctest("-j2")
